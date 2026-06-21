@@ -18,14 +18,14 @@ with open("style.css", encoding="utf-8") as f:
 
 with st.sidebar:
     
-    with st.expander("⚙️ Conexão MySQL"):
+    with st.expander(" Conexão MySQL"):
         from db_connection import DB_CONFIG, save_db_config, test_connection
         host_sb = st.text_input("Host", value=DB_CONFIG.get("host", "localhost"), key="sb_host")
         port_sb = st.number_input("Porta", value=int(DB_CONFIG.get("port", 3306)), step=1, key="sb_port")
         user_sb = st.text_input("Usuário", value=DB_CONFIG.get("user", "root"), key="sb_user")
         pwd_sb = st.text_input("Senha", value=DB_CONFIG.get("password", ""), type="password", key="sb_pwd")
         
-        if st.button("💾 Salvar & Recarregar", key="btn_save_config_sidebar", use_container_width=True):
+        if st.button(" Salvar & Recarregar", key="btn_save_config_sidebar", use_container_width=True):
             try:
                 # Testar se credenciais funcionam
                 test_connection(host_sb, port_sb, user_sb, pwd_sb)
@@ -36,7 +36,7 @@ with st.sidebar:
                 st.error(f"Erro de conexão: {e}")
 
         st.markdown("---")
-        if st.button("🔄 Recriar Banco de Dados", key="btn_reset_db_sidebar", use_container_width=True, type="secondary"):
+        if st.button(" Recriar Banco de Dados", key="btn_reset_db_sidebar", use_container_width=True, type="secondary"):
             try:
                 from db_connection import init_database
                 with st.spinner("Apagando e recriando banco de dados..."):
@@ -199,36 +199,36 @@ except Exception as e:
         user_input = st.text_input("MySQL Usuário", value=DB_CONFIG.get("user", "root"), key="setup_user")
         pwd_input = st.text_input("MySQL Senha", value=DB_CONFIG.get("password", ""), type="password", key="setup_pwd")
         
-        btn_connect = st.button("🔌 Testar e Salvar Conexão", use_container_width=True)
+        btn_connect = st.button(" Testar e Salvar Conexão", use_container_width=True)
         if btn_connect:
             try:
 
                 test_connection(host_input, port_input, user_input, pwd_input)
                 save_db_config(host_input, port_input, user_input, pwd_input, "Copa_do_Mundo")
-                st.success("🔌 Conectado ao MySQL com sucesso! Salvando configurações...")
+                st.success(" Conectado ao MySQL com sucesso! Salvando configurações...")
                 st.rerun()
             except Exception as conn_err:
-                st.error(f"❌ Falha de conexão: {conn_err}")
+                st.error(f" Falha de conexão: {conn_err}")
                 
     with col_c2:
-        st.markdown("### 🚀 Inicialização Automática do Banco")
+        st.markdown("###  Inicialização Automática do Banco")
         st.markdown(
             "Se você ainda não criou o banco de dados `Copa_do_Mundo` ou as tabelas, clique no botão abaixo para "
             "criar o schema, triggers e carregar os dados de exemplo automaticamente."
         )
-        btn_init = st.button("⚡ Inicializar Banco de Dados (Copa_do_Mundo)", use_container_width=True, type="primary")
+        btn_init = st.button(" Inicializar Banco de Dados (Copa_do_Mundo)", use_container_width=True, type="primary")
         if btn_init:
             try:
                 with st.spinner("Criando banco de dados, tabelas, triggers e carregando dados iniciais..."):
                     init_database(host_input, port_input, user_input, pwd_input)
                     save_db_config(host_input, port_input, user_input, pwd_input, "Copa_do_Mundo")
-                st.success("🎉 Banco de dados inicializado com sucesso!")
+                st.success(" Banco de dados inicializado com sucesso!")
                 st.rerun()
             except Exception as init_err:
                 st.error(f"❌ Erro ao inicializar banco: {init_err}")
                 
     st.markdown("---")
-    with st.expander("🔍 Detalhes técnicos do erro atual"):
+    with st.expander(" Detalhes técnicos do erro atual"):
         st.code(str(e))
 
 

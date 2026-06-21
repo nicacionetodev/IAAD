@@ -1,66 +1,84 @@
 # Sistema de Gerenciamento da Copa do Mundo — CRUD Streamlit + MySQL
 
-Este projeto é um sistema computacional web completo para gerenciamento de dados de seleções, estádios, jogadores, partidas e cartões da Copa do Mundo 2026. Ele conta com uma interface gráfica desenvolvida com Streamlit e conexão nativa ao banco de dados MySQL.
+Este projeto é um sistema computacional web completo para gerenciamento de dados de seleções, estádios, jogadores, partidas e cartões da Copa do Mundo 2026. Ele possui uma interface desenvolvida com Streamlit e comunicação direta com o banco de dados MySQL.
 
-## Estrutura do Projeto
+---
 
-* **app.py**: Ponto de entrada do aplicativo, contendo a página inicial e estatísticas gerais.
-* **db_connection.py**: Módulo responsável pela conexão dinâmica com o MySQL e execução de scripts SQL.
-* **style.css**: Arquivo contendo estilos CSS customizados .
-* **requirements.txt**: Arquivo que especifica as dependências Python necessárias.
-* **Copa_do_Mundo.sql**: Script SQL com a estrutura básica de tabelas do banco de dados.
-* **setup_database.sql**: Script SQL com modificações de colunas, trigger de verificação de expulsão e dados de exemplo ampliados (16 seleções, 80 jogadores, 16 partidas e 28 cartões).
-* **pages/**: Diretório que contém as telas de gerenciamento (CRUD) de cada entidade e o dashboard gráfico.
-  * **01_Estadios.py**: Gerenciamento de Estádios.
-  * **02_Selecoes.py**: Gerenciamento de Seleções .
-  * **03_Jogadores.py**: Gerenciamento de Jogadores .
-  * **04_Partidas.py**: Gerenciamento de Partidas .
-  * **05_Cartoes.py**: Gerenciamento de Cartões .
-  * **06_Dashboard.py**: Painel analítico com gráficos interativos utilizando Plotly.
+## Pré-requisitos Obrigatórios
 
-## Pré-requisitos
+Para executar este projeto na sua máquina, é necessário ter instalado:
 
-1. **MySQL Server**: Certifique-se de que o servidor do MySQL esteja em execução na sua máquina.
-2. **Python 3.8+**: Certifique-se de ter o Python instalado.
+1. **Python 3.8 ou superior**
+2. **Servidor MySQL** ativo e rodando localmente (pode ser o MySQL Community Server, XAMPP, WampServer ou uma instância em Docker).
 
-## Como Executar o Projeto
+---
 
-### 1. Instalar as dependências
+## Guia de Instalação e Execução Completo
 
-Abra o terminal ou prompt de comando no diretório raiz do projeto e execute:
+### Passo 1: Preparar o Servidor MySQL
+Certifique-se de que o seu serviço do MySQL está em execução. O sistema se conectará a este servidor para criar e gerenciar a base de dados.
+* O host padrão é `localhost`.
+* A porta padrão do MySQL é `3306`.
+
+### Passo 2: Instalar as Dependências do Python
+Abra o seu terminal ou prompt de comando (cmd) na pasta raiz do projeto e instale os pacotes necessários executando o comando:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Iniciar a aplicação
+As dependências instaladas serão:
+* `streamlit` (interface web)
+* `mysql-connector-python` (driver de conexão com o banco)
+* `pandas` (manipulação de dados e tabelas)
+* `plotly` (geração dos gráficos do painel de controle)
 
-Execute o seguinte comando no terminal:
+### Passo 3: Executar a Aplicação
+Com o servidor do MySQL rodando e as dependências instaladas, inicie o aplicativo executando:
 
 ```bash
 streamlit run app.py
 ```
 
-### 3. Configurar e Inicializar o Banco de Dados
+---
 
-* Se for a primeira execução e a conexão falhar, a tela inicial exibirá automaticamente um painel de configuração.
-* Preencha os campos com os dados de acesso do seu MySQL local (**Host**, **Porta**, **Usuário** e **Senha**).
-* Clique no botão **"Inicializar Banco de Dados (Copa_do_Mundo)"** para criar o banco de dados, aplicar o trigger e popular as tabelas com os dados iniciais.
-* O sistema irá gerar um arquivo `db_config.json` localmente para salvar as credenciais e recarregará a aplicação automaticamente já conectada.
+## Configuração do Banco de Dados e Conexão (Sem necessidade de importação manual)
 
-*Caso queira redefinir a conexão ou recriar o banco a qualquer momento, expanda a aba **"Conexão MySQL"** no menu lateral esquerdo da aplicação e clique em **"Recriar Banco de Dados"**.*
+Você **não** precisa executar os arquivos `.sql` manualmente no MySQL Workbench ou no terminal. O próprio sistema possui um assistente automatizado de criação:
 
-## Funcionalidades e Regras de Negócio
+1. Ao abrir o Streamlit pela primeira vez, caso a conexão padrão falhe, a página exibirá uma tela de configuração intitulada **"Configurações de Acesso"**.
+2. Insira as credenciais do seu servidor MySQL local nos campos:
+   * **Host** (normalmente `localhost`)
+   * **Porta** (normalmente `3306`)
+   * **Usuário** (geralmente `root`)
+   * **Senha** (insira a senha definida na instalação do seu MySQL)
+3. No painel ao lado, clique no botão **"Inicializar Banco de Dados (Copa_do_Mundo)"**.
+4. O sistema irá:
+   * Criar a base de dados `Copa_do_Mundo` no seu servidor MySQL.
+   * Criar todas as tabelas estruturais (`selecoes`, `estadios`, `jogadores`, `partidas` e `cartoes`).
+   * Aplicar os triggers necessários para a lógica de expulsões automáticas.
+   * Popular as tabelas com um conjunto de teste amplo (16 seleções, 80 jogadores, 16 partidas e 28 cartões).
 
-### Trigger de Expulsão 
-O sistema conta com um trigger no MySQL associado à tabela `cartoes`. Ao inserir um cartão, o banco de dados verifica automaticamente:
-* Se for um cartão **Vermelho** direto: O jogador é marcado como expulso.
-* Se for o segundo cartão **Amarelo** recebido pelo mesmo jogador na mesma partida: O jogador é marcado como expulso.
+A aplicação salvará as credenciais localmente no arquivo `db_config.json` e atualizará a tela automaticamente.
 
-Essa verificação e marcação ocorrem diretamente na camada do banco de dados e são refletidas instantaneamente na listagem de cartões do Streamlit.
+---
 
-### Consultas Não-Triviais
-O painel de controle (Dashboard) e as páginas CRUD realizam consultas avançadas no banco de dados utilizando:
-* **TIMESTAMPDIFF** para obter a idade exata dos jogadores baseando-se na data de nascimento atual.
-* **LEFT JOIN** e **INNER JOIN** para cruzar informações de partidas, seleções, estádios e cartões.
-* Funções de agregação como **SUM**, **COUNT** e **AVG** agrupadas via **GROUP BY** para exibir estatísticas como gols por seleção, cartões acumulados e capacidade média dos estádios por país.
+## Segurança e Controle de Versão
+
+* **db_config.json**: Este arquivo armazena as suas credenciais locais de acesso ao banco (inclusive senhas).
+* **.gitignore**: O projeto inclui um arquivo de exclusão que impede o arquivo `db_config.json` de ser enviado para repositórios públicos (como o GitHub), evitando vulnerabilidades de segurança e mantendo as senhas protegidas no seu ambiente de desenvolvimento.
+
+---
+
+## Principais Lógicas e Funcionalidades
+
+###  Trigger de Expulsão Automática
+Na tabela de cartões, um trigger é acionado antes de cada inserção:
+* Cartões **Vermelhos** diretos marcam o jogador automaticamente como expulso.
+* O acúmulo de **2 cartões amarelos** para o mesmo jogador dentro de uma mesma partida aciona a expulsão automática.
+
+###  Dashboard e Consultas Não-Triviais
+A aba de Dashboard do sistema apresenta 7 gráficos analíticos criados via Plotly, alimentados por consultas avançadas no MySQL contendo:
+* **LEFT JOIN / INNER JOIN** para relacionar jogadores, partidas, estádios e seleções.
+* **GROUP BY** associado a funções de agregação (`SUM`, `COUNT`, `AVG`).
+* **TIMESTAMPDIFF** para calcular dinamicamente a idade dos jogadores baseando-se na data de nascimento gravada no banco.
