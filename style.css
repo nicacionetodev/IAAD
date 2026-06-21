@@ -593,3 +593,7 @@ hr {
         min-width: auto;
     }
 }
+
+[data-testid="stSidebar"] button p {
+    color: black !important;
+}

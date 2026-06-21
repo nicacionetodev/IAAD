@@ -14,7 +14,7 @@ DEFAULT_CONFIG = {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "nikond600",
+    "password": "",
     "database": "Copa_do_Mundo",
     "charset": "utf8mb4",
     "use_unicode": True,

@@ -64,5 +64,3 @@ O painel de controle (Dashboard) e as páginas CRUD realizam consultas avançada
 * **TIMESTAMPDIFF** para obter a idade exata dos jogadores baseando-se na data de nascimento atual.
 * **LEFT JOIN** e **INNER JOIN** para cruzar informações de partidas, seleções, estádios e cartões.
 * Funções de agregação como **SUM**, **COUNT** e **AVG** agrupadas via **GROUP BY** para exibir estatísticas como gols por seleção, cartões acumulados e capacidade média dos estádios por país.
-
-# IAAD
