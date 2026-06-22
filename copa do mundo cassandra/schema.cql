@@ -24,6 +24,15 @@ CREATE TABLE jogadores_por_selecao (
     PRIMARY KEY (id_selecao, id_jogador)
 );
 
+CREATE TABLE estadios (
+    id_estadio int, 
+    nome_estadio text,
+    cidade text,
+    pais text,
+    capacidade int,
+    PRIMARY KEY (id_estadio)
+);
+
 CREATE TABLE partidas_por_data (
     data_partida date,
     id_partida int,

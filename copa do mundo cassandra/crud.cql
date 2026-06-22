@@ -26,6 +26,28 @@ SELECT *
 FROM selecoes
 WHERE id_selecao = 5;
 
+-- Inserindo um novo estádio
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+)
+VALUES (
+    99,
+    'Arruda',
+    'Recife',
+    'Brasil',
+    60000
+);
+
+-- Verificando inserção
+
+SELECT *
+FROM estadios
+WHERE id_estadio = 99;
 
 -- =====================================================
 -- READ
@@ -57,6 +79,12 @@ SELECT *
 FROM cartoes_por_partida
 WHERE id_partida = 1;
 
+-- Buscar estádio específico
+
+SELECT *
+FROM estadios
+WHERE id_estadio = 1;
+
 
 -- =====================================================
 -- UPDATE
@@ -87,6 +115,18 @@ SELECT *
 FROM selecoes
 WHERE id_selecao = 5;
 
+-- Atualizar capacidade do estádio
+
+UPDATE estadios
+SET capacidade = 50000
+WHERE id_estadio = 99;
+
+-- Conferir atualização
+
+SELECT *
+FROM estadios
+WHERE id_estadio = 99;
+
 
 -- =====================================================
 -- DELETE
@@ -103,6 +143,16 @@ WHERE id_selecao = 5;
 SELECT *
 FROM selecoes
 WHERE id_selecao = 5;
+
+DELETE
+FROM estadios
+WHERE id_estadio = 99;
+
+-- Confirmar exclusão
+
+SELECT *
+FROM estadios
+WHERE id_estadio = 99;
 
 
 -- =====================================================

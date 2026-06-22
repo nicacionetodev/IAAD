@@ -311,3 +311,119 @@ VALUES (
     65,
     false
 );
+
+-- =====================================================
+-- ESTADIOS
+-- =====================================================
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    1,
+    'MetLife Stadium',
+    'East Rutherford',
+    'Estados Unidos',
+    82500
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    2,
+    'AT&T Stadium',
+    'Arlington',
+    'Estados Unidos',
+    80000
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    3,
+    'SoFi Stadium',
+    'Inglewood',
+    'Estados Unidos',
+    70240
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    4,
+    'Estadio Azteca',
+    'Cidade do Mexico',
+    'Mexico',
+    87523
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    5,
+    'BMO Field',
+    'Toronto',
+    'Canada',
+    30000
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    6,
+    'Hard Rock Stadium',
+    'Miami Gardens',
+    'Estados Unidos',
+    64767
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    7,
+    'Mercedes-Benz Stadium',
+    'Atlanta',
+    'Estados Unidos',
+    71000
+);
+
+INSERT INTO estadios (
+    id_estadio,
+    nome_estadio,
+    cidade,
+    pais,
+    capacidade
+) VALUES (
+    8,
+    'Arrowhead Stadium',
+    'Kansas City',
+    'Estados Unidos',
+    76416
+);
